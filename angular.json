@@ -52,8 +52,11 @@
             "development": {
               "optimization": {
   "scripts": true,
-  "styles": true,
-  "fonts": false
+  "styles": {
+    "minify": true,
+    "inlineCritical": false
+  },
+  "fonts": true
 },
               "extractLicenses": false,
               "sourceMap": true
