@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-md sticky-top nav-x">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2 text-white" routerLink="/">
+      <div
+        style="
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+          overflow: hidden;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <img
+          alt="Photography Logo"
+          src="https://adasa-psi.vercel.app/assets/logo-GdqARQRt.png"
+          style="width: 100%; height: 100%; object-fit: cover; display: block"
+        />
+      </div>
+      <span
+        ><b>عدسة</b
+        ><small class="d-block text-orange" style="font-size: 0.6rem"
+          >عالم التصوير الفوتوغرافي</small
+        ></span
+      >
+    </a>
+    <button class="navbar-toggler bg-secondary" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav mx-auto gap-1">
+        <li class="nav-item">
+          <a
+            class="nav-link nav-pill"
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >الرئيسية</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-pill" routerLink="/blog" routerLinkActive="active">المدونة</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-pill" routerLink="/about" routerLinkActive="active">من نحن</a>
+        </li>
+      </ul>
+      <a routerLink="/blog" class="btn btn-orange rounded-pill px-4">ابدأ القراءة</a>
+    </div>
+  </div>
+</nav>

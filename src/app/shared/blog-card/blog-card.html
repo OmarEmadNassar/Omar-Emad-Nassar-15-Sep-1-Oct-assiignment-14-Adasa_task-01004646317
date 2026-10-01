@@ -1,0 +1,29 @@
+<a
+  [routerLink]="['/blog', post.slug]"
+  class="card-x d-flex text-decoration-none h-100"
+  [class.flex-column]="layout === 'grid'"
+  [class.flex-md-row]="layout === 'list'"
+>
+  <div class="img-wrap" [class.list-img]="layout === 'list'">
+    <img [src]="post.image" [alt]="post.title" class="w-100 h-100 object-fit-cover" />
+    <span class="badge bg-dark position-absolute top-0 start-0 m-2">{{ post.category }}</span>
+  </div>
+  <div class="p-3 d-flex flex-column flex-grow-1">
+    <small class="text-orange"><i class="fa-regular fa-clock"></i> {{ post.readTime }}</small>
+    <h6 class="text-white mt-2 title-x">{{ post.title }}</h6>
+    <p class="text-white-50 small flex-grow-1">{{ post.excerpt }}</p>
+    <div class="d-flex align-items-center gap-2 mt-2">
+      <img
+        [src]="post.author.avatar"
+        class="rounded-circle"
+        width="32"
+        height="32"
+        [alt]="post.author.name"
+      />
+      <div class="lh-sm">
+        <div class="text-white small">{{ post.author.name }}</div>
+        <small class="text-orange">{{ post.author.role }}</small>
+      </div>
+    </div>
+  </div>
+</a>

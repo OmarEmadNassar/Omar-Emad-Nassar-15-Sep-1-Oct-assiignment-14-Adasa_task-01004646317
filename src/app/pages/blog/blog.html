@@ -1,0 +1,65 @@
+<section class="hero text-center py-5">
+  <span class="badge-x">المدونة</span>
+  <h1 class="fw-bold text-white mt-3">استكشف <span class="text-orange">مقالاتنا</span></h1>
+  <p class="text-white-50">اكتشف الدروس والرؤى وأفضل الممارسات للتطوير الحديث</p>
+</section>
+
+<section class="container pb-5">
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <div class="d-flex flex-wrap gap-2">
+      <button class="cat-pill" [class.active]="activeCategory() === ALL" (click)="setCategory(ALL)">
+        {{ ALL }}
+      </button>
+      @for (c of categories(); track c.name) {
+        <button
+          class="cat-pill"
+          [class.active]="activeCategory() === c.name"
+          (click)="setCategory(c.name)"
+        >
+          {{ c.name }}
+        </button>
+      }
+    </div>
+    <div class="search-wrap">
+      <i class="fa-solid fa-search"></i>
+      <input
+        class="form-control input-x"
+        placeholder="ابحث في المقالات..."
+        [value]="search()"
+        (input)="setSearch($any($event.target).value)"
+      />
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <small class="text-white-50">عرض {{ filtered().length }} مقالة</small>
+    <div class="btn-group">
+      <button
+        class="btn btn-sm"
+        [class.btn-orange]="view() === 'list'"
+        [class.btn-outline-secondary]="view() !== 'list'"
+        (click)="view.set('list')"
+      >
+        <i class="fa-solid fa-list"></i>
+      </button>
+      <button
+        class="btn btn-sm"
+        [class.btn-orange]="view() === 'grid'"
+        [class.btn-outline-secondary]="view() !== 'grid'"
+        (click)="view.set('grid')"
+      >
+        <i class="fa-solid fa-table-cells-large"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    @for (p of filtered(); track p.id) {
+      <div [class]="view() === 'grid' ? 'col-md-6 col-lg-4' : 'col-12'">
+        <app-blog-card [post]="p" [layout]="view()" />
+      </div>
+    } @empty {
+      <p class="text-white-50 text-center py-5">لا توجد مقالات مطابقة لبحثك</p>
+    }
+  </div>
+</section>

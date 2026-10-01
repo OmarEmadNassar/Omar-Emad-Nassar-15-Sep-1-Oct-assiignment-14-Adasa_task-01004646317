@@ -1,0 +1,91 @@
+<section class="hero text-center">
+  <div class="container">
+    <span class="badge-x">مرحباً بك في عدسة</span>
+    <h1 class="display-4 fw-bold text-white mt-3">
+      اكتشف <span class="text-orange">فن</span><br />التصوير الفوتوغرافي
+    </h1>
+    <p class="text-white-50 mx-auto" style="max-width: 520px">
+      انغمس في أسرار المحترفين ونصائح عملية لتطوير مهاراتك في التصوير.
+    </p>
+    <div class="d-flex justify-content-center gap-2 my-4">
+      <a routerLink="/blog" class="btn btn-orange rounded-pill px-4">استكشف المقالات</a>
+      <a routerLink="/about" class="btn btn-outline-light rounded-pill px-4">تعرف علينا</a>
+    </div>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      @for (s of stats; track s.label) {
+        <div class="stat-x">
+          <i class="fa-solid {{ s.icon }} text-orange"></i
+          ><b class="d-block text-white">{{ s.value }}</b
+          ><small class="text-white-50">{{ s.label }}</small>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+@if (data$ | async; as data) {
+  <section class="container py-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+      <div>
+        <h2 class="text-white">مقالات مختارة</h2>
+        <p class="text-white-50 mb-0">محتوى منتقى ليسد رحلة تعلمك</p>
+      </div>
+      <a routerLink="/blog" class="btn btn-orange btn-sm rounded-pill">عرض الكل</a>
+    </div>
+    <div class="row g-3">
+      @for (p of featured(data.posts); track p.id) {
+        <div class="col-12"><app-blog-card [post]="p" layout="list" /></div>
+      } @empty {
+        <p class="text-white-50">لا توجد مقالات</p>
+      }
+    </div>
+  </section>
+
+  <section class="band py-5">
+    <div class="container text-center">
+      <h2 class="text-white">استكشف حسب الموضوع</h2>
+      <p class="text-white-50">اعثر على محتوى مصمم حسب اهتماماتك</p>
+      <div class="row g-3 justify-content-center">
+        @for (c of data.categories; track c.name) {
+          <div class="col-6 col-md-3">
+            <a routerLink="/blog" class="cat-x d-block text-decoration-none p-3">
+              <i class="fa-solid fa-camera-retro text-orange fs-4"></i>
+              <b class="d-block text-white mt-2">{{ c.name }}</b
+              ><small class="text-white-50">{{ c.count }} مقالات</small>
+            </a>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="container py-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+      <div>
+        <h2 class="text-white">أحدث المقالات</h2>
+        <p class="text-white-50 mb-0">محتوى جديد طازج من المدونة</p>
+      </div>
+      <a routerLink="/blog" class="text-orange text-decoration-none">عرض جميع المقالات</a>
+    </div>
+    <div class="row g-3">
+      @for (p of latest(data.posts); track p.id) {
+        <div class="col-md-4"><app-blog-card [post]="p" /></div>
+      }
+    </div>
+  </section>
+}
+
+<section class="container py-5">
+  <div class="news-x text-center mx-auto p-5 my-5">
+    <i class="fa-regular fa-envelope text-orange fs-3"></i>
+    <h3 class="text-white mt-2">اشترك في <span class="text-orange">نشرتنا</span> الإخبارية</h3>
+    <p class="text-white-50 small">احصل على نصائح التصوير الحصرية مباشرة في بريدك.</p>
+    <div class="input-group">
+      <input class="form-control input-x" placeholder="أدخل بريدك الإلكتروني" /><button
+        class="btn btn-orange"
+      >
+        اشترك الآن
+      </button>
+    </div>
+  </div>
+</section>

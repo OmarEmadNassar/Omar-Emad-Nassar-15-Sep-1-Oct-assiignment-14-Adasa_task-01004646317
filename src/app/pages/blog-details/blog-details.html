@@ -1,0 +1,174 @@
+@if (post(); as post) {
+  <div class="details-hero" [style.backgroundImage]="'url(' + post.image + ')'">
+    <div class="details-hero-overlay"></div>
+    <div class="container position-relative h-100 d-flex flex-column justify-content-end py-5">
+      <nav class="breadcrumb-x mb-3">
+        <a routerLink="/"><i class="fa-solid fa-house"></i></a>
+        <i class="fa-solid fa-chevron-left mx-2"></i>
+        <a routerLink="/blog">المدونة</a>
+        <i class="fa-solid fa-chevron-left mx-2"></i>
+        <span class="text-orange">{{ post.category }}</span>
+      </nav>
+      <div class="d-flex align-items-center gap-3 mb-3 flex-wrap">
+        <span class="badge-x bg-orange-solid">{{ post.category }}</span>
+        <small class="text-white-50"><i class="fa-regular fa-calendar"></i> {{ post.date }}</small>
+        <small class="text-white-50"><i class="fa-regular fa-clock"></i> {{ post.readTime }}</small>
+      </div>
+      <h1 class="text-white fw-bold">{{ post.title }}</h1>
+    </div>
+  </div>
+
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-lg-8 order-lg-2">
+        <div class="author-card d-inline-flex align-items-center gap-3 p-2 pe-4 mb-4">
+          <img
+            [src]="post.author.avatar"
+            class="rounded-circle"
+            width="52"
+            height="52"
+            [alt]="post.author.name"
+          />
+          <div>
+            <div class="text-white">{{ post.author.name }}</div>
+            <small class="text-gray">{{ post.author.role }}</small>
+          </div>
+        </div>
+
+        <blockquote class="quote-x">
+          <i class="fa-solid fa-quote-right"></i>
+          <p class="mb-0">{{ post.excerpt }}</p>
+        </blockquote>
+
+        @if (intro(); as intro) {
+          <p class="text-light lh-lg">{{ intro }}</p>
+        }
+
+        @for (s of sections(); track $index) {
+          <div class="pt-3">
+            <h3 class="text-white mt-3 d-flex justify-content-between align-items-center">
+              {{ s.heading }}
+              <span class="icon-badge"><i class="fa-solid fa-camera"></i></span>
+            </h3>
+            <p [id]="'paragraph-' + ($index + 1)" class="text-light lh-lg toc-paragraph">
+              {{ s.text }}
+            </p>
+          </div>
+        }
+
+        <div
+          class="d-flex align-items-center gap-2 flex-wrap mt-4 pt-4 border-top border-secondary"
+        >
+          <span class="tag-lbl">الوسوم <i class="fa-solid fa-tags text-orange"></i></span>
+          @for (t of post.tags; track t) {
+            <span class="badge-x">#{{ t }}</span>
+          }
+        </div>
+
+        <div
+          class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-secondary flex-wrap gap-2"
+        >
+          <span class="tag-lbl"
+            >شارك المقال <i class="fa-solid fa-share-nodes text-orange"></i
+          ></span>
+          <div class="d-flex gap-2">
+            <button class="share-btn" title="نسخ الرابط"><i class="fa-solid fa-link"></i></button>
+            <button class="share-btn" title="واتساب"><i class="fa-brands fa-whatsapp"></i></button>
+            <button class="share-btn" title="لينكدإن">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </button>
+            <button class="share-btn" title="إكس"><i class="fa-brands fa-x-twitter"></i></button>
+          </div>
+        </div>
+
+        <div class="author-bio mt-4 p-4 d-flex gap-3 align-items-center flex-wrap">
+          <img
+            [src]="post.author.avatar"
+            class="rounded-circle"
+            width="72"
+            height="72"
+            [alt]="post.author.name"
+          />
+          <div>
+            <small class="text-orange">كاتب المقال</small>
+            <h5 class="text-white mb-0">{{ post.author.name }}</h5>
+            <small class="text-gray d-block mb-2">{{ post.author.role }}</small>
+            <p class="text-gray small mb-0">
+              {{ post.author.role }} يشارك خبرته ومعرفته في عالم التصوير الفوتوغرافي لتطوير
+              مهاراتكم.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 order-lg-1">
+        <div class="toc-card p-3 mb-3">
+          <h6 class="text-white d-flex justify-content-between align-items-center mb-3">
+            محتويات المقال <i class="fa-solid fa-list-ul text-orange"></i>
+          </h6>
+          <ul class="list-unstyled toc-list mb-0">
+            @for (s of sections(); track $index) {
+              <li>
+                <a [href]="'#paragraph-' + ($index + 1)" (click)="scrollToParagraph($event, $index)"
+                  ><span class="num">{{ $index + 1 }}</span
+                  >{{ s.heading }}</a
+                >
+              </li>
+            }
+          </ul>
+        </div>
+
+        <div class="row g-2 mb-3">
+          <div class="col-6">
+            <div class="mini-stat p-3 text-center h-100">
+              <i class="fa-regular fa-calendar text-orange"></i
+              ><b class="d-block text-white small mt-1">{{ post.date }}</b
+              ><small class="text-gray">تاريخ النشر</small>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mini-stat p-3 text-center h-100">
+              <i class="fa-regular fa-clock text-orange"></i
+              ><b class="d-block text-white small mt-1">{{ post.readTime }}</b
+              ><small class="text-gray">وقت القراءة</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="news-mini p-3 text-center">
+          <i class="fa-regular fa-envelope text-orange fs-4"></i>
+          <h6 class="text-white mt-2 mb-1">لا تفوّت جديدنا</h6>
+          <small class="text-gray d-block mb-3">اشترك للحصول على أحدث المقالات</small>
+          <a routerLink="/blog" class="btn btn-orange btn-sm w-100">تصفح المزيد</a>
+        </div>
+      </div>
+    </div>
+
+    @if (related(); as rel) {
+      @if (rel.length) {
+        <section class="mt-5 pt-4 border-top border-secondary">
+          <div class="d-flex justify-content-between align-items-end mb-3">
+            <div>
+              <h4 class="text-white mb-1">مقالات قد تعجبك</h4>
+              <small class="text-gray">استكشف المزيد من المحتوى المميز</small>
+            </div>
+            <a routerLink="/blog" class="text-orange text-decoration-none">عرض الكل</a>
+          </div>
+          <div class="row g-3">
+            @for (p of rel; track p.id) {
+              <div class="col-md-4"><app-blog-card [post]="p" /></div>
+            }
+          </div>
+        </section>
+      }
+    }
+  </div>
+} @else if (loaded()) {
+  <div class="container text-center py-5 my-5">
+    <h3 class="text-white">المقال غير موجود</h3>
+    <p class="text-gray">تأكد من الرابط أو ارجع لصفحة المدونة.</p>
+    <a routerLink="/blog" class="btn btn-orange rounded-pill px-4">العودة للمدونة</a>
+  </div>
+} @else {
+  <div class="container text-center py-5 my-5"><p class="text-gray">جاري التحميل...</p></div>
+}
