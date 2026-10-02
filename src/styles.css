@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 :root { --orange:#f97316; --bg:#0a0a0a; --card:#151515; --line:#2a2a2a; }
 body { background:var(--bg); color:#ddd; font-family:'Cairo','Segoe UI',sans-serif; }
 a { transition:color .3s; }
