@@ -10,10 +10,9 @@
   },
   "private": true,
   "packageManager": "npm@11.17.0",
-	"packageManager": "npm@11.17.0",
-"engines": {
-  "node": "20.x"
-},
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "@angular/common": "^21.2.0",
     "@angular/compiler": "^21.2.0",
