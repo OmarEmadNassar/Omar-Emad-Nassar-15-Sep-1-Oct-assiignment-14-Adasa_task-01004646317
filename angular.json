@@ -34,7 +34,7 @@
             ]
           },
           "configurations": {
-            "production": {
+                        "production": {
               "budgets": [
                 {
                   "type": "initial",
@@ -47,17 +47,21 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
-            },
-            "development": {
+              "outputHashing": "all",
               "optimization": {
-  "scripts": true,
-  "styles": {
-    "minify": true,
-    "inlineCritical": false
-  },
-  "fonts": false
-},
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                },
+                "fonts": false
+              }
+            },
+                        "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            },
               "extractLicenses": false,
               "sourceMap": true
             }
